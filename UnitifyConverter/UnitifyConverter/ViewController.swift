@@ -11,11 +11,11 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        convertPoundsToKilograms()
+        convertPoundsToKilograms(pounds: 145)
     }
     
-    func convertPoundsToKilograms() {
-        let kilograms = 185 * 0.453592
+    func convertPoundsToKilograms(pounds: Double) {
+        let kilograms = pounds * 0.453592
         print("kilograms - \(kilograms)")
     }
 }
