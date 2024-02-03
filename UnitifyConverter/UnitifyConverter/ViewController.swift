@@ -12,11 +12,20 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         convertPoundsToKilograms(pounds: 145)
+        print("[----------------------------]")
+        kilometersPerLiter(from: 15.1)
     }
     
     func convertPoundsToKilograms(pounds: Double) {
         let kilograms = pounds * 0.453592
         print("kilograms - \(kilograms)")
+    }
+    
+//    7.1l/100 -> ?liters / km
+    
+    func kilometersPerLiter(from litersPerHundredkm: Double) {
+        let kmPerLiter = 100 / litersPerHundredkm
+         print(kmPerLiter)
     }
 }
 
