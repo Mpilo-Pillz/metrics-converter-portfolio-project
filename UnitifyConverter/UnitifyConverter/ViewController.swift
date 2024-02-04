@@ -14,6 +14,8 @@ class ViewController: UIViewController {
         convertPoundsToKilograms(pounds: 145)
         print("[----------------------------]")
         kilometersPerLiter(from: 15.1)
+        print("[----------------------------]")
+        convertMilesToKm(miles: 2)
     }
     
     func convertPoundsToKilograms(pounds: Double) {
@@ -26,6 +28,11 @@ class ViewController: UIViewController {
     func kilometersPerLiter(from litersPerHundredkm: Double) {
         let kmPerLiter = 100 / litersPerHundredkm
          print(kmPerLiter)
+    }
+    
+    func convertMilesToKm(miles: Double) {
+        let kilometer = miles * 1.609
+        print(kilometer)
     }
 }
 
