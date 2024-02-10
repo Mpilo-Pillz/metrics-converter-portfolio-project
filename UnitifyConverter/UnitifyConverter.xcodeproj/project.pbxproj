@@ -14,6 +14,8 @@
 		C42043262B6EDBEE001B5AF1 /* UnitifyConverterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42043252B6EDBEE001B5AF1 /* UnitifyConverterTests.swift */; };
 		C42043302B6EDBEE001B5AF1 /* UnitifyConverterUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C420432F2B6EDBEE001B5AF1 /* UnitifyConverterUITests.swift */; };
 		C42043322B6EDBEE001B5AF1 /* UnitifyConverterUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42043312B6EDBEE001B5AF1 /* UnitifyConverterUITestsLaunchTests.swift */; };
+		C4C619732B9382BA000DA95A /* ConverterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C619712B9382BA000DA95A /* ConverterViewController.swift */; };
+		C4C619742B9382BA000DA95A /* ConverterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C4C619722B9382BA000DA95A /* ConverterViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +47,8 @@
 		C420432B2B6EDBEE001B5AF1 /* UnitifyConverterUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnitifyConverterUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C420432F2B6EDBEE001B5AF1 /* UnitifyConverterUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitifyConverterUITests.swift; sourceTree = "<group>"; };
 		C42043312B6EDBEE001B5AF1 /* UnitifyConverterUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitifyConverterUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		C4C619712B9382BA000DA95A /* ConverterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConverterViewController.swift; sourceTree = "<group>"; };
+		C4C619722B9382BA000DA95A /* ConverterViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConverterViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +104,8 @@
 				C42043172B6EDBEE001B5AF1 /* Assets.xcassets */,
 				C42043192B6EDBEE001B5AF1 /* LaunchScreen.storyboard */,
 				C420431C2B6EDBEE001B5AF1 /* Info.plist */,
+				C4C619712B9382BA000DA95A /* ConverterViewController.swift */,
+				C4C619722B9382BA000DA95A /* ConverterViewController.xib */,
 			);
 			path = UnitifyConverter;
 			sourceTree = "<group>";
@@ -226,6 +232,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C420431B2B6EDBEE001B5AF1 /* LaunchScreen.storyboard in Resources */,
+				C4C619742B9382BA000DA95A /* ConverterViewController.xib in Resources */,
 				C42043182B6EDBEE001B5AF1 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -253,6 +260,7 @@
 			files = (
 				C42043132B6EDBEB001B5AF1 /* ViewController.swift in Sources */,
 				C420430F2B6EDBEB001B5AF1 /* AppDelegate.swift in Sources */,
+				C4C619732B9382BA000DA95A /* ConverterViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
