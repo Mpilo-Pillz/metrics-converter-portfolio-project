@@ -10,6 +10,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ConverterViewController" customModule="UnitifyConverter" customModuleProvider="target">
             <connections>
+                <outlet property="measurementTypesPicker" destination="1oK-Td-eMO" id="WQe-3x-lAo"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
