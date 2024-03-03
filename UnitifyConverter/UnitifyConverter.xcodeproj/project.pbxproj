@@ -16,6 +16,8 @@
 		C42043322B6EDBEE001B5AF1 /* UnitifyConverterUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42043312B6EDBEE001B5AF1 /* UnitifyConverterUITestsLaunchTests.swift */; };
 		C4C619732B9382BA000DA95A /* ConverterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C619712B9382BA000DA95A /* ConverterViewController.swift */; };
 		C4C619742B9382BA000DA95A /* ConverterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C4C619722B9382BA000DA95A /* ConverterViewController.xib */; };
+		C4C619772B93B55A000DA95A /* Converter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C619762B93B55A000DA95A /* Converter.swift */; };
+		C4C619792B9458CF000DA95A /* PickerViewHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C619782B9458CF000DA95A /* PickerViewHandler.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +51,8 @@
 		C42043312B6EDBEE001B5AF1 /* UnitifyConverterUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitifyConverterUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		C4C619712B9382BA000DA95A /* ConverterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConverterViewController.swift; sourceTree = "<group>"; };
 		C4C619722B9382BA000DA95A /* ConverterViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConverterViewController.xib; sourceTree = "<group>"; };
+		C4C619762B93B55A000DA95A /* Converter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Converter.swift; sourceTree = "<group>"; };
+		C4C619782B9458CF000DA95A /* PickerViewHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerViewHandler.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +103,7 @@
 		C420430D2B6EDBEB001B5AF1 /* UnitifyConverter */ = {
 			isa = PBXGroup;
 			children = (
+				C4C619752B93B4EA000DA95A /* Model */,
 				C420430E2B6EDBEB001B5AF1 /* AppDelegate.swift */,
 				C42043122B6EDBEB001B5AF1 /* ViewController.swift */,
 				C42043172B6EDBEE001B5AF1 /* Assets.xcassets */,
@@ -106,6 +111,7 @@
 				C420431C2B6EDBEE001B5AF1 /* Info.plist */,
 				C4C619712B9382BA000DA95A /* ConverterViewController.swift */,
 				C4C619722B9382BA000DA95A /* ConverterViewController.xib */,
+				C4C619782B9458CF000DA95A /* PickerViewHandler.swift */,
 			);
 			path = UnitifyConverter;
 			sourceTree = "<group>";
@@ -125,6 +131,14 @@
 				C42043312B6EDBEE001B5AF1 /* UnitifyConverterUITestsLaunchTests.swift */,
 			);
 			path = UnitifyConverterUITests;
+			sourceTree = "<group>";
+		};
+		C4C619752B93B4EA000DA95A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C4C619762B93B55A000DA95A /* Converter.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -258,8 +272,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C4C619792B9458CF000DA95A /* PickerViewHandler.swift in Sources */,
 				C42043132B6EDBEB001B5AF1 /* ViewController.swift in Sources */,
 				C420430F2B6EDBEB001B5AF1 /* AppDelegate.swift in Sources */,
+				C4C619772B93B55A000DA95A /* Converter.swift in Sources */,
 				C4C619732B9382BA000DA95A /* ConverterViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
