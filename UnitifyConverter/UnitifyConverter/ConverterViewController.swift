@@ -10,21 +10,51 @@ import UIKit
 class ConverterViewController: UIViewController {
     
     let measurementTypes = ["Mass", "Length", "Consumption"]
+    var units = [Unit(name: "Kilograms", conversionFactor: 10.0), Unit(name: "Pounds lb", conversionFactor: 100.0)]
+    var selectedFromUnit: Unit?
+    var selectedToUnit: Unit?
     
+    @IBOutlet weak var fromTextField: UITextField!
     @IBOutlet weak var measurementTypesPicker: UIPickerView!
+    @IBOutlet weak var fromUnitPicker: UIPickerView!
+    @IBOutlet weak var toUnitPicker: UIPickerView!
     
+    var pickerViewHandler: PickerViewHandler!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         measurementTypesPicker.dataSource = self
         measurementTypesPicker.delegate = self
+        
+        fromUnitPicker.dataSource = self
+        fromUnitPicker.delegate = self
+        toUnitPicker.delegate = self
+        toUnitPicker.dataSource = self
+        
+        selectedFromUnit = units.first
+                selectedToUnit = units.first
         // Do any additional setup after loading the view.
     }
 
 
    
-
+    @IBAction func calculateButtonPressed(_ sender: UIButton) {
+        guard let fromValue = Double(fromTextField.text ?? ""),
+              let fromUnit = selectedFromUnit,
+              let toUnit = selectedToUnit else {
+            return
+        }
+        
+        let converter = Converter(fromUnit: fromUnit, toUnit: toUnit)
+        let result = converter.convert(value: fromValue)
+        
+//        outputTextField.text = "\(result)"
+              
+    }
+    
 }
+
+
 
 extension ConverterViewController: UIPickerViewDataSource, UIPickerViewDelegate {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
