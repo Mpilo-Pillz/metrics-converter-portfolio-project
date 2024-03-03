@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ConverterViewController: UIViewController {
+class ConverterViewController: UIViewController  {
     
     let measurementTypes = ["Mass", "Length", "Consumption"]
     var units = [Unit(name: "Kilograms", conversionFactor: 10.0), Unit(name: "Pounds lb", conversionFactor: 100.0)]
@@ -19,25 +19,24 @@ class ConverterViewController: UIViewController {
     @IBOutlet weak var fromUnitPicker: UIPickerView!
     @IBOutlet weak var toUnitPicker: UIPickerView!
     
-    var pickerViewHandler: PickerViewHandler!
+    var measurementTypePickerviewHandler: PickerViewHandler!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        measurementTypesPicker.dataSource = self
-        measurementTypesPicker.delegate = self
         
-        fromUnitPicker.dataSource = self
-        fromUnitPicker.delegate = self
-        toUnitPicker.delegate = self
-        toUnitPicker.dataSource = self
+        configurePickerViews()
         
         selectedFromUnit = units.first
-                selectedToUnit = units.first
-        // Do any additional setup after loading the view.
+        selectedToUnit = units.first
     }
-
-
-   
+    
+    private func configurePickerViews() {
+        measurementTypePickerviewHandler = PickerViewHandler(items: measurementTypes, delegate: self)
+        
+        measurementTypesPicker.dataSource = measurementTypePickerviewHandler
+        measurementTypesPicker.delegate = measurementTypePickerviewHandler
+    }
+    
     @IBAction func calculateButtonPressed(_ sender: UIButton) {
         guard let fromValue = Double(fromTextField.text ?? ""),
               let fromUnit = selectedFromUnit,
@@ -46,31 +45,15 @@ class ConverterViewController: UIViewController {
         }
         
         let converter = Converter(fromUnit: fromUnit, toUnit: toUnit)
-        let result = converter.convert(value: fromValue)
+        //        let result = converter.convert(value: fromValue)
         
-//        outputTextField.text = "\(result)"
-              
+        //        outputTextField.text = "\(result)"
+        
     }
-    
 }
 
-
-
-extension ConverterViewController: UIPickerViewDataSource, UIPickerViewDelegate {
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return measurementTypes.count
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return measurementTypes[row]
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-       print("TODO implement")
-        print(measurementTypes[row])
+extension ConverterViewController: PickerViewHandlerDelegate {
+    func didSelectItem(_ handler: PickerViewHandler, selectedItem: String) {
+        print("SelectedITem \(selectedItem)")
     }
 }
