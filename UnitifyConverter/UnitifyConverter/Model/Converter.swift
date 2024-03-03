@@ -6,7 +6,7 @@
 //
 
 import Foundation
-struct Unit {
+struct Unit: Nameable {
     let name: String
     let conversionFactor: Double
 }

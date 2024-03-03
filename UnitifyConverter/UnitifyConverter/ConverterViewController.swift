@@ -11,6 +11,7 @@ class ConverterViewController: UIViewController  {
     
     let measurementTypes = ["Mass", "Length", "Consumption"]
     var units = [Unit(name: "Kilograms", conversionFactor: 10.0), Unit(name: "Pounds lb", conversionFactor: 100.0)]
+    
     var selectedFromUnit: Unit?
     var selectedToUnit: Unit?
     
@@ -20,6 +21,8 @@ class ConverterViewController: UIViewController  {
     @IBOutlet weak var toUnitPicker: UIPickerView!
     
     var measurementTypePickerviewHandler: PickerViewHandler!
+    var fromUitPickerViewHandler: PickerViewHandler!
+    var toUnitPickerViewHandler: PickerViewHandler!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,9 +35,16 @@ class ConverterViewController: UIViewController  {
     
     private func configurePickerViews() {
         measurementTypePickerviewHandler = PickerViewHandler(items: measurementTypes, delegate: self)
+        fromUitPickerViewHandler = PickerViewHandler(items: getStringsFromMap(from: units), delegate: self)
+        toUnitPickerViewHandler = PickerViewHandler(items: getStringsFromMap(from: units), delegate: self)
+        
         
         measurementTypesPicker.dataSource = measurementTypePickerviewHandler
         measurementTypesPicker.delegate = measurementTypePickerviewHandler
+        fromUnitPicker.delegate = fromUitPickerViewHandler
+        fromUnitPicker.dataSource = fromUitPickerViewHandler
+        toUnitPicker.delegate = toUnitPickerViewHandler
+        toUnitPicker.dataSource = toUnitPickerViewHandler
     }
     
     @IBAction func calculateButtonPressed(_ sender: UIButton) {
