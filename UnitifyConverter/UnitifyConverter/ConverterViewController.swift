@@ -10,10 +10,12 @@ import UIKit
 class ConverterViewController: UIViewController  {
     
     let measurementTypes = ["Mass", "Length", "Consumption"]
-    var units = [Unit(name: "Kilograms", conversionFactor: 10.0), Unit(name: "Pounds lb", conversionFactor: 100.0)]
+    let units = ["Kilograms", "Pounds lb", ]
+    var unitsObj = [Unit(name: "Kilograms", conversionFactor: 10.0), Unit(name: "Pounds lb", conversionFactor: 100.0)]
     
-    var selectedFromUnit: Unit?
-    var selectedToUnit: Unit?
+    
+    var selectedFromUnit: String? //Unit?
+    var selectedToUnit: String? //Unit?
     
     @IBOutlet weak var fromTextField: UITextField!
     @IBOutlet weak var measurementTypesPicker: UIPickerView!
@@ -35,8 +37,10 @@ class ConverterViewController: UIViewController  {
     
     private func configurePickerViews() {
         measurementTypePickerviewHandler = PickerViewHandler(items: measurementTypes, delegate: self)
-        fromUitPickerViewHandler = PickerViewHandler(items: getStringsFromMap(from: units), delegate: self)
-        toUnitPickerViewHandler = PickerViewHandler(items: getStringsFromMap(from: units), delegate: self)
+        fromUitPickerViewHandler = PickerViewHandler(items: units, delegate: self)
+        toUnitPickerViewHandler = PickerViewHandler(items: units, delegate: self)
+//        fromUitPickerViewHandler = PickerViewHandler(items: getStringsFromMap(from: units), delegate: self)
+//        toUnitPickerViewHandler = PickerViewHandler(items: getStringsFromMap(from: units), delegate: self)
         
         
         measurementTypesPicker.dataSource = measurementTypePickerviewHandler
@@ -50,11 +54,18 @@ class ConverterViewController: UIViewController  {
     @IBAction func calculateButtonPressed(_ sender: UIButton) {
         guard let fromValue = Double(fromTextField.text ?? ""),
               let fromUnit = selectedFromUnit,
-              let toUnit = selectedToUnit else {
+              let toUnit = selectedToUnit
+                
+                
+        else {
             return
         }
         
-        let converter = Converter(fromUnit: fromUnit, toUnit: toUnit)
+        
+        print("-->\(fromUnit)")
+        print("-->\(toUnit)")
+        
+//        let converter = Converter(fromUnit: fromUnit, toUnit: toUnit)
         //        let result = converter.convert(value: fromValue)
         
         //        outputTextField.text = "\(result)"
@@ -64,6 +75,14 @@ class ConverterViewController: UIViewController  {
 
 extension ConverterViewController: PickerViewHandlerDelegate {
     func didSelectItem(_ handler: PickerViewHandler, selectedItem: String) {
-        print("SelectedITem \(selectedItem)")
+                
+        if handler === measurementTypePickerviewHandler {
+                   print("TODO filterList")
+               } else if handler === fromUitPickerViewHandler {
+                   selectedFromUnit = selectedItem
+               } else if handler === toUnitPickerViewHandler {
+                   
+                   selectedToUnit = selectedItem
+               }
     }
 }
