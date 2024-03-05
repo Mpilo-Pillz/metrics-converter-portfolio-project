@@ -13,6 +13,7 @@
                 <outlet property="fromTextField" destination="fnS-Ha-RjF" id="3TD-Hf-1fw"/>
                 <outlet property="fromUnitPicker" destination="7n3-LN-OWe" id="LHN-QM-cbg"/>
                 <outlet property="measurementTypesPicker" destination="1oK-Td-eMO" id="WQe-3x-lAo"/>
+                <outlet property="resultLabel" destination="ORV-Y2-F6o" id="sQU-Wl-KCP"/>
                 <outlet property="toUnitPicker" destination="ToJ-pA-v14" id="WnQ-Qj-eRD"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
