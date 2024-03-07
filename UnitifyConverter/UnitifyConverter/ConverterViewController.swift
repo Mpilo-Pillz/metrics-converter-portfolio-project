@@ -9,16 +9,16 @@ import UIKit
 
 class ConverterViewController: UIViewController  {
     
-    let measurementTypes = ["Mass", "Length", "Consumption"]
-
-//    var units = [Unit(name: "Kilograms kg", conversionFactor: 1.0, unitType: UnitType.mass), Unit(name: "Pounds lb", conversionFactor: 2.20462, unitType: UnitType.mass), Unit(name: "Grams g", conversionFactor: 0.001, unitType: UnitType.mass)]
-//    453.592
+    
+    let massConverter = MassConverter()
     
     var units = [
         Unit(name: "Kilograms kg", conversionFactor: 1.0, unitType: .mass), // Base unit for mass
         Unit(name: "Pounds lb", conversionFactor: 0.453592, unitType: .mass), // Pounds to kg
         Unit(name: "Grams g", conversionFactor: 0.001, unitType: .mass) // Grams to kg
     ]
+    
+    
     
     var selectedFromUnit: Unit?
     var selectedToUnit: Unit?
@@ -43,7 +43,7 @@ class ConverterViewController: UIViewController  {
     }
     
     private func configurePickerViews() {
-        measurementTypePickerViewHandler = PickerViewHandler(items: measurementTypes, delegate: self)
+        measurementTypePickerViewHandler = PickerViewHandler(items: massConverter.measurementUnits, delegate: self)
         
         fromUnitPickerViewHandler = PickerViewHandler(items: getStringsFromMap(from: units), delegate: self)
         toUnitPickerViewHandler = PickerViewHandler(items: getStringsFromMap(from: units), delegate: self)
@@ -58,24 +58,17 @@ class ConverterViewController: UIViewController  {
     }
     
     @IBAction func calculateButtonPressed(_ sender: UIButton) {
+       
         guard let fromValue = Double(fromTextField.text ?? ""),
               let fromUnit = selectedFromUnit,
               let toUnit = selectedToUnit
-                
                 
         else {
             return
         }
         
-        
-        print("-->\(fromUnit)")
-        print("-->\(toUnit)")
-        
-        let converter = Converter(fromUnit: fromUnit, toUnit: toUnit)
-        let result = converter.convert(value: fromValue)
-        
-//        resultLabel.text = "\(result)"
-        
+        let result = massConverter.convert(value: fromValue, fromUnit: fromUnit, toUnit: toUnit)
+                
         guard let value = result else {
             resultLabel.text = "Default Value or Leave Empty"
             return
