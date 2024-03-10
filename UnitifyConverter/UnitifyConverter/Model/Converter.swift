@@ -25,7 +25,7 @@ struct Conversion {
 }
 
 let conversions = [
-    UnitType.mass: Conversion(units: ["kg", "lb", "g"]),
+    UnitType.mass: Conversion(units: [Mass.KILOGRAMS, Mass.POUNDS, Mass.GRAMS]),
     UnitType.distance: Conversion(units: ["miles", "km", "m"]),
     UnitType.length: Conversion(units: ["m", "ft", "cm"]),
     UnitType.fuelConsumption: Conversion(units: ["km/l", "l/100km",])

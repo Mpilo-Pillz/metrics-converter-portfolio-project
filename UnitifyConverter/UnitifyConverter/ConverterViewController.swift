@@ -12,8 +12,8 @@ class ConverterViewController: UIViewController  {
     let massConverter = MassConverter()
     let defaultUnitType: UnitType = UnitType.allCases.first ?? .mass
     
-    var selectedFromUnit: Unit? // TODO revisit
-    var selectedToUnit: Unit? // TODO revisit
+    var selectedFromUnit: String? // TODO revisit
+    var selectedToUnit: String? // TODO revisit
     
     @IBOutlet weak var resultLabel: UILabel!
     @IBOutlet weak var fromTextField: UITextField!
@@ -29,8 +29,8 @@ class ConverterViewController: UIViewController  {
         super.viewDidLoad()
         
         configurePickerViews()
-        //        selectedFromUnit = units.first
-        //        selectedToUnit = units.first
+        selectedFromUnit = conversions[defaultUnitType]?.units.first
+        selectedToUnit = conversions[defaultUnitType]?.units.first
     }
     
     private func configurePickerViews() {
@@ -53,7 +53,6 @@ class ConverterViewController: UIViewController  {
         guard let fromValue = Double(fromTextField.text ?? ""),
               let fromUnit = selectedFromUnit,
               let toUnit = selectedToUnit
-                
         else {
             return
         }
@@ -79,17 +78,21 @@ extension ConverterViewController: PickerViewHandlerDelegate {
         if handler === measurementTypePickerViewHandler {
             // User selected a unit type, update the units picker
             if let unitType = UnitType(rawValue: selectedItem) {
-                fromUnitPickerViewHandler?.items = getUnitsOrReturnEmptyArray(unitType)
-                toUnitPickerViewHandler?.items = getUnitsOrReturnEmptyArray(unitType)
+                let units = getUnitsOrReturnEmptyArray(unitType)
+                fromUnitPickerViewHandler?.items = units
+                toUnitPickerViewHandler?.items = units
                 fromUnitPicker.reloadAllComponents()
                 toUnitPicker.reloadAllComponents()
+                
+                selectedFromUnit = conversions[unitType]?.units.first
+                selectedToUnit = conversions[unitType]?.units.first
             }
         } else if handler === fromUnitPickerViewHandler {
             
-            //                   selectedFromUnit = units.first {$0.name == selectedItem}
+            selectedFromUnit = selectedItem
         }
         else if handler === toUnitPickerViewHandler {
-            //            selectedToUnit = units.first {$0.name == selectedItem}
+            selectedToUnit = selectedItem
         }
     }
 }

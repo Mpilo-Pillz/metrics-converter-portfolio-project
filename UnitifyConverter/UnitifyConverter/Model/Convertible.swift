@@ -8,6 +8,5 @@
 import Foundation
 
 protocol Convertible {
-    var units: [Unit] { get }
-    func convert(value: Double,fromUnit: Unit, toUnit: Unit) -> Double?
+    func convert(value: Double,fromUnit: String, toUnit: String) -> Double?
 }

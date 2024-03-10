@@ -7,33 +7,26 @@
 
 import Foundation
 
+struct Mass {
+    static let KILOGRAMS = "Kilograms kg"
+    static let POUNDS = "Pounds lb"
+    static let GRAMS = "Grams g"
+}
 struct MassConverter: Convertible {
     
-    let measurementUnits = ["Mass", "Length", "Consumption"]
     
-    var units: [Unit] = [
-        Unit(name: "Kilograms kg", conversionFactor: 1.0, unitType: .mass), // Base unit for mass
-        Unit(name: "Pounds lb", conversionFactor: 0.453592, unitType: .mass), // Pounds to kg
-        Unit(name: "Grams g", conversionFactor: 0.001, unitType: .mass) // Grams to kg
-    ]
-    
-    func convert(value: Double, fromUnit: Unit, toUnit: Unit) -> Double?  {
-        guard fromUnit.unitType == toUnit.unitType else {
-            print("Conversion between different unit types is not allowed.")
-            return nil
-        }
-        
+    func convert(value: Double, fromUnit: String, toUnit: String) -> Double?  {
         // Direct conversion if converting within the same unit or to the base unit
-        if fromUnit.name == "Kilograms kg" && toUnit.name == "Pounds lb" {
+        if fromUnit == Mass.KILOGRAMS && toUnit == Mass.POUNDS {
             // Converting from kg to lbs
             return value * 2.20462
-        } else if fromUnit.name == "Pounds lb" && toUnit.name == "Kilograms kg" {
+        } else if fromUnit == Mass.POUNDS && toUnit == Mass.KILOGRAMS {
             // Converting from lbs to kg
             return value * 0.453592
-        } else if fromUnit.name == "Grams g" && toUnit.name == "Kilograms kg" {
+        } else if fromUnit == Mass.GRAMS && toUnit == Mass.KILOGRAMS {
             // Converting from g to kg
             return value / 1000
-        } else if fromUnit.name == "Kilograms kg" && toUnit.name == "Grams g" {
+        } else if fromUnit == Mass.KILOGRAMS && toUnit == Mass.GRAMS {
             // Converting from kg to g
             return value * 1000
         } else {
