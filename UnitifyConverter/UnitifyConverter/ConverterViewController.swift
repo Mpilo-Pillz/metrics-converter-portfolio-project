@@ -41,6 +41,9 @@ class ConverterViewController: UIViewController  {
     var fromUnitPickerViewHandler: PickerViewHandler!
     var toUnitPickerViewHandler: PickerViewHandler!
     
+    let defaultUnitType = UnitType.allCases.first ?? .mass
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -54,8 +57,8 @@ class ConverterViewController: UIViewController  {
         
         measurementTypePickerViewHandler = PickerViewHandler(items: UnitType.allCases.map { $0.rawValue }, delegate: self)
         
-        fromUnitPickerViewHandler = PickerViewHandler(items: [], delegate: self)
-        toUnitPickerViewHandler = PickerViewHandler(items: [], delegate: self)
+        fromUnitPickerViewHandler = PickerViewHandler(items: conversions[defaultUnitType]?.units ?? [], delegate: self)
+        toUnitPickerViewHandler = PickerViewHandler(items: conversions[defaultUnitType]?.units ?? [], delegate: self)
         
         
 //        measurementTypePickerViewHandler = PickerViewHandler(items: massConverter.measurementUnits, delegate: self)
@@ -73,8 +76,8 @@ class ConverterViewController: UIViewController  {
         
         
         
-//        measurementTypesPicker.selectRow(0, inComponent: 0, animated: false)
-        
+        measurementTypesPicker.selectRow(0, inComponent: 0, animated: false)
+//        didSelectItem(fromUnitPickerViewHandler, selectedItem: conversions[.m]?.units)
 //        fromUnitPicker.pickerView(unitTypePicker, didSelectRow: 0, inComponent: 0)
         
     }
@@ -118,17 +121,5 @@ extension ConverterViewController: PickerViewHandlerDelegate {
         else if handler === toUnitPickerViewHandler {
 //            selectedToUnit = units.first {$0.name == selectedItem}
         }
-
-        
-        
-//         if handler === measurementTypePickerViewHandler {
-// //            selectedUnitType = UnitType.allCases[row]
-// //            toUnitPicker.reloadAllComponents()
-// //            fromUnitPicker.reloadAllComponents()
-//         } else if handler === fromUnitPickerViewHandler {
-//             selectedFromUnit = units.first {$0.name == selectedItem}
-//         } else if handler === toUnitPickerViewHandler {
-//             selectedToUnit = units.first {$0.name == selectedItem}
-//         }
     }
 }
