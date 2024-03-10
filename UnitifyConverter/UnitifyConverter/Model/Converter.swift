@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum UnitType {
+enum UnitType: String, CaseIterable  {
     case mass
     case distance
     case length
@@ -19,6 +19,17 @@ struct Unit: Nameable {
     let conversionFactor: Double
     let unitType: UnitType
 }
+
+struct Conversion {
+    var units: [String]
+}
+
+let conversions = [
+    UnitType.mass: Conversion(units: ["kg", "lb", "g"]),
+    UnitType.distance: Conversion(units: ["miles", "km", "m"]),
+    UnitType.length: Conversion(units: ["m", "ft", "cm"]),
+    UnitType.fuelConsumption: Conversion(units: ["km/l", "l/100km",])
+]
 
 struct Converter {
     let fromUnit: Unit
