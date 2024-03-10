@@ -73,7 +73,7 @@ class ConverterViewController: UIViewController  {
         
         
         
-        measurementTypesPicker.selectRow(0, inComponent: 0, animated: false)
+//        measurementTypesPicker.selectRow(0, inComponent: 0, animated: false)
         
 //        fromUnitPicker.pickerView(unitTypePicker, didSelectRow: 0, inComponent: 0)
         
@@ -106,7 +106,8 @@ extension ConverterViewController: PickerViewHandlerDelegate {
         if handler === measurementTypePickerViewHandler {
                    // User selected a unit type, update the units picker
                    if let unitType = UnitType(rawValue: selectedItem) {
-                       measurementTypePickerViewHandler?.items = conversions[unitType]?.units ?? []
+                       fromUnitPickerViewHandler?.items = conversions[unitType]?.units ?? []
+                       toUnitPickerViewHandler?.items = conversions[unitType]?.units ?? []
                        fromUnitPicker.reloadAllComponents()
                        toUnitPicker.reloadAllComponents()
                    }
