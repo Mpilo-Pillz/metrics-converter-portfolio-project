@@ -12,7 +12,7 @@ protocol PickerViewHandlerDelegate: AnyObject {
 }
 
 class PickerViewHandler: NSObject, UIPickerViewDelegate, UIPickerViewDataSource {
-     var items: [String]
+    var items: [String]
     weak var delegate: PickerViewHandlerDelegate?
     
     init(items: [String], delegate: PickerViewHandlerDelegate? = nil) {
@@ -34,6 +34,6 @@ class PickerViewHandler: NSObject, UIPickerViewDelegate, UIPickerViewDataSource 
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         let selectedItem = items[row]
-        delegate?.didSelectItem(self, selectedItem: selectedItem)  
+        delegate?.didSelectItem(self, selectedItem: selectedItem)
     }
 }

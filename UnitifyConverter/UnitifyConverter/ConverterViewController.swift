@@ -9,27 +9,11 @@ import UIKit
 
 class ConverterViewController: UIViewController  {
     
-    
     let massConverter = MassConverter()
+    let defaultUnitType: UnitType = UnitType.allCases.first ?? .mass
     
-    var units = [
-        Unit(name: "Kilograms kg", conversionFactor: 1.0, unitType: .mass), // Base unit for mass
-        Unit(name: "Pounds lb", conversionFactor: 0.453592, unitType: .mass), // Pounds to kg
-        Unit(name: "Grams g", conversionFactor: 0.001, unitType: .mass) // Grams to kg
-    ]
-    
-    let conversions: [UnitType: Conversion] = [
-        UnitType.mass: Conversion(units: ["kg", "lb", "g"]),
-        UnitType.distance: Conversion(units: ["miles", "km", "m"]),
-        UnitType.length: Conversion(units: ["m", "ft", "cm"]),
-        UnitType.fuelConsumption: Conversion(units: ["km/l", "l/100km",])
-    ]
-    
-    
-    var selectedUnitType: UnitType = .mass
-    
-    var selectedFromUnit: Unit?
-    var selectedToUnit: Unit?
+    var selectedFromUnit: Unit? // TODO revisit
+    var selectedToUnit: Unit? // TODO revisit
     
     @IBOutlet weak var resultLabel: UILabel!
     @IBOutlet weak var fromTextField: UITextField!
@@ -41,31 +25,18 @@ class ConverterViewController: UIViewController  {
     var fromUnitPickerViewHandler: PickerViewHandler!
     var toUnitPickerViewHandler: PickerViewHandler!
     
-    let defaultUnitType = UnitType.allCases.first ?? .mass
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         configurePickerViews()
-        
-        selectedFromUnit = units.first
-        selectedToUnit = units.first
+        //        selectedFromUnit = units.first
+        //        selectedToUnit = units.first
     }
     
     private func configurePickerViews() {
-        
         measurementTypePickerViewHandler = PickerViewHandler(items: UnitType.allCases.map { $0.rawValue }, delegate: self)
-        
-        fromUnitPickerViewHandler = PickerViewHandler(items: conversions[defaultUnitType]?.units ?? [], delegate: self)
-        toUnitPickerViewHandler = PickerViewHandler(items: conversions[defaultUnitType]?.units ?? [], delegate: self)
-        
-        
-//        measurementTypePickerViewHandler = PickerViewHandler(items: massConverter.measurementUnits, delegate: self)
-        
-//        fromUnitPickerViewHandler = PickerViewHandler(items: getStringsFromMap(from: units), delegate: self)
-//        toUnitPickerViewHandler = PickerViewHandler(items: getStringsFromMap(from: units), delegate: self)
-        
+        fromUnitPickerViewHandler = PickerViewHandler(items: getUnitsOrReturnEmptyArray(defaultUnitType), delegate: self)
+        toUnitPickerViewHandler = PickerViewHandler(items: getUnitsOrReturnEmptyArray(defaultUnitType), delegate: self)
         
         measurementTypesPicker.dataSource = measurementTypePickerViewHandler
         measurementTypesPicker.delegate = measurementTypePickerViewHandler
@@ -74,16 +45,11 @@ class ConverterViewController: UIViewController  {
         toUnitPicker.delegate = toUnitPickerViewHandler
         toUnitPicker.dataSource = toUnitPickerViewHandler
         
-        
-        
         measurementTypesPicker.selectRow(0, inComponent: 0, animated: false)
-//        didSelectItem(fromUnitPickerViewHandler, selectedItem: conversions[.m]?.units)
-//        fromUnitPicker.pickerView(unitTypePicker, didSelectRow: 0, inComponent: 0)
         
     }
     
     @IBAction func calculateButtonPressed(_ sender: UIButton) {
-        
         guard let fromValue = Double(fromTextField.text ?? ""),
               let fromUnit = selectedFromUnit,
               let toUnit = selectedToUnit
@@ -104,22 +70,26 @@ class ConverterViewController: UIViewController  {
 }
 
 extension ConverterViewController: PickerViewHandlerDelegate {
+    
+    fileprivate func getUnitsOrReturnEmptyArray(_ unitType: UnitType) -> [String] {
+        return conversions[unitType]?.units ?? []
+    }
+    
     func didSelectItem(_ handler: PickerViewHandler, selectedItem: String) {
-        
         if handler === measurementTypePickerViewHandler {
-                   // User selected a unit type, update the units picker
-                   if let unitType = UnitType(rawValue: selectedItem) {
-                       fromUnitPickerViewHandler?.items = conversions[unitType]?.units ?? []
-                       toUnitPickerViewHandler?.items = conversions[unitType]?.units ?? []
-                       fromUnitPicker.reloadAllComponents()
-                       toUnitPicker.reloadAllComponents()
-                   }
-               } else if handler === fromUnitPickerViewHandler {
-                   
-//                   selectedFromUnit = units.first {$0.name == selectedItem}
-               }
+            // User selected a unit type, update the units picker
+            if let unitType = UnitType(rawValue: selectedItem) {
+                fromUnitPickerViewHandler?.items = getUnitsOrReturnEmptyArray(unitType)
+                toUnitPickerViewHandler?.items = getUnitsOrReturnEmptyArray(unitType)
+                fromUnitPicker.reloadAllComponents()
+                toUnitPicker.reloadAllComponents()
+            }
+        } else if handler === fromUnitPickerViewHandler {
+            
+            //                   selectedFromUnit = units.first {$0.name == selectedItem}
+        }
         else if handler === toUnitPickerViewHandler {
-//            selectedToUnit = units.first {$0.name == selectedItem}
+            //            selectedToUnit = units.first {$0.name == selectedItem}
         }
     }
 }
