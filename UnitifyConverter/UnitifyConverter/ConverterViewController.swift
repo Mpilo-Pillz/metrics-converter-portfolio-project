@@ -10,10 +10,13 @@ import UIKit
 class ConverterViewController: UIViewController  {
     
     let massConverter = MassConverter()
+    let fuelConsumptionConverter = FuelConsumptionConverter()
     let defaultUnitType: UnitType = UnitType.allCases.first ?? .mass
     
     var selectedFromUnit: String? // TODO revisit
     var selectedToUnit: String? // TODO revisit
+    
+    var currentUnitType: UnitType = .mass
     
     @IBOutlet weak var resultLabel: UILabel!
     @IBOutlet weak var fromTextField: UITextField!
@@ -57,7 +60,18 @@ class ConverterViewController: UIViewController  {
             return
         }
         
-        let result = massConverter.convert(value: fromValue, fromUnit: fromUnit, toUnit: toUnit)
+        var result: Double?
+        
+        switch currentUnitType {
+           case .mass:
+               result = massConverter.convert(value: fromValue, fromUnit: selectedFromUnit ?? "", toUnit: selectedToUnit ?? "")
+           case .fuelConsumption:
+               result = fuelConsumptionConverter.convert(value: fromValue, fromUnit: selectedFromUnit ?? "", toUnit: selectedToUnit ?? "")
+        case .distance:
+            print("TO IMPLEMENT")
+        case .length:
+            print("TO IMPLEMENT")
+        }
         
         guard let value = result else {
             resultLabel.text = "Default Value or Leave Empty"
@@ -78,6 +92,7 @@ extension ConverterViewController: PickerViewHandlerDelegate {
         if handler === measurementTypePickerViewHandler {
             // User selected a unit type, update the units picker
             if let unitType = UnitType(rawValue: selectedItem) {
+                currentUnitType = unitType
                 let units = getUnitsOrReturnEmptyArray(unitType)
                 fromUnitPickerViewHandler?.items = units
                 toUnitPickerViewHandler?.items = units
